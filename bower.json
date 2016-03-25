@@ -7,7 +7,7 @@
   ],
   "license": "ISC",
   "moduleType": [],
-  "homepage": "https://github.com/browneryan/js-template",
+  "homepage": "https://github.com/browneryan/meal-tracker-angular",
   "ignore": [
     "**/.*",
     "node_modules",
