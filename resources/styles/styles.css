@@ -1,3 +1,72 @@
-.selected {
+h1, .selected {
   color: darkolivegreen;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.meal-item {
+  padding-bottom: 20px;
+  border-bottom: 1px solid black;
+  width: 100%;
+}
+
+.meal-form {
+  margin: 50px auto;
+}
+
+.btn-new-meal {
+  background-color: lightslategrey;
+  color: white;
+  border: 2px solid darkolivegreen;
+  width: 50%;
+  margin: 0 auto;
+  padding: 8px;
+  margin-top: 15px;
+  transition: all 500ms linear;
+}
+
+.btn-new-meal:hover {
+  background-color: white;
+  color: darkolivegreen;
+}
+
+.meal-form {
+  background-color: darkolivegreen;
+  color: white;
+  letter-spacing: 1px;
+  padding: 5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 35a0px;
+}
+
+.form-fields {
+  display: flex;
+  flex-direction: column;
+  width: 475px;
+}
+
+.edit-form {
+  background-color: darkolivegreen;
+  color: white;
+  letter-spacing: 1px;
+  padding: 5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 35a0px;
+}
+
+input {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  text-align: center;
+  height: 25px;
+  color: black;
 }
