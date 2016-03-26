@@ -12,7 +12,7 @@ import { CaloriesPipe } from './calories.pipe';
   pipes: [CaloriesPipe],
   template: `
     <div class="form">
-      <div class="formFields">
+      <div class="form-fields">
         <label>By Calories:</label>
         <select (change)="onChangeCalories($event.target.value)" class="filter">
           <option value="all"  selected="selected">Show All</option>
@@ -22,17 +22,24 @@ import { CaloriesPipe } from './calories.pipe';
       </div>
     </div>
     <div *ngFor="#currentMeal of mealList
-      | calories:filterCalories" [class.selected]="currentMeal === selectedMeal">
+      | calories:filterCalories"
+      [class.selected]="currentMeal === selectedMeal">
       <h3 (click)="mealClicked(currentMeal)">
         {{ currentMeal.name }}
       </h3>
-    <meal-display *ngIf="currentMeal === selectedMeal"
-    [meal]="currentMeal">
-    </meal-display>
+      <div class="meal-item">
+        <meal-display
+          *ngIf="currentMeal === selectedMeal"
+          [meal]="currentMeal">
+        </meal-display>
+      </div>
     </div>
-    <edit-meal-details *ngIf="selectedMeal" [meal]="selectedMeal">
+    <edit-meal-details
+      *ngIf="selectedMeal"
+      [meal]="selectedMeal">
     </edit-meal-details>
-    <new-meal (onSubmitNewMeal)="createMeal($event)">
+    <new-meal
+      (onSubmitNewMeal)="createMeal($event)">
     </new-meal>
   `
 })
@@ -40,9 +47,7 @@ export class MealListComponent {
   public mealList: Meal[];
   public selectedMeal: Meal;
   public filterCalories: string = "all";
-
   constructor() {}
-
   mealClicked(clickedMeal: Meal): void {
     if(this.selectedMeal === clickedMeal) {
       this.selectedMeal = undefined;
