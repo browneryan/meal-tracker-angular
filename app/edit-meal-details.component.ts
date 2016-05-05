@@ -4,6 +4,7 @@ import { Meal } from './meal.model';
 @Component({
   selector: 'edit-meal-details',
   inputs: ['meal'],
+  outputs: ['onUpdateTotalCalories'],
   template: `
     <div class="edit-form">
       <h3>Edit Description:</h3>
