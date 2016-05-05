@@ -11,7 +11,6 @@ import { CaloriesPipe } from './calories.pipe';
   directives: [MealComponent, EditMealDetailsComponent, NewMealComponent],
   pipes: [CaloriesPipe],
   template: `
-    <h4>Calorie Count: {{calorieCount}}</h4>
     <div class="form">
       <div class="form-fields">
         <label>By Calories:</label>
@@ -42,6 +41,7 @@ import { CaloriesPipe } from './calories.pipe';
     <new-meal
       (onSubmitNewMeal)="createMeal($event)">
     </new-meal>
+    <h4>Calorie Count: {{calorieCount}} | Average Calories Count: {{averageCaloriesString}}</h4>
   `
 })
 export class MealListComponent {
@@ -62,7 +62,7 @@ export class MealListComponent {
     (Math.round((this.averageCalories)*100)/100).toFixed(1);
     }
   }
-  createMeal(newMealInfo): void {
+  createMeal(newMealInfo: Array<any>): void {
     this.mealList.push(
       new Meal(newMealInfo[0], newMealInfo[1], newMealInfo[2])
     );
@@ -70,5 +70,16 @@ export class MealListComponent {
   }
   onChangeCalories(selectCalories) {
     this.filterCalories = selectCalories;
+  }
+  updateCalorieCounter(newMealCalories: number): void {
+    this.calorieCount = 0;
+    for(var i = 0; i < this.mealList.length; i++) {
+      if(this.mealList[i].name === "selectedMeal") {
+        this.mealList[i].calories = newMealCalories;
+      }
+      this.calorieCount += (this.mealList[i].calories);
+      this.averageCalories = (this.calorieCount / (this.mealList.length));
+      this.averageCaloriesString = (Math.round((this.averageCalories)*100)/100).toFixed(1);
+    }
   }
 }
