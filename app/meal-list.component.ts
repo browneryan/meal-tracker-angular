@@ -40,7 +40,7 @@ import { CaloriesPipe } from './calories.pipe';
     <new-meal
       (onSubmitNewMeal)="createMeal($event)">
     </new-meal>
-    <h4>Calorie Count: {{calorieCount}} | Average Calorie Count: {{averageCaloriesString}}</h4>
+    <h4>Calorie Count: {{calorieCount}} | Average Calorie Count: {{averageCaloriesString()}}</h4>
   `
 })
 export class MealListComponent {
