@@ -49,12 +49,17 @@ export class MealListComponent {
   public selectedMeal: Meal;
   public filterCalories: string = "all";
   public calorieCount: number = 0;
+  public averageCalories: number = 0;
+  public averageCaloriesString: string;
   constructor() {}
   mealClicked(clickedMeal: Meal): void {
     if(this.selectedMeal === clickedMeal) {
       this.selectedMeal = undefined;
     } else {
     this.selectedMeal = clickedMeal;
+    this.averageCalories = (this.calorieCount / (this.mealList.length));
+    this.averageCaloriesString =
+    (Math.round((this.averageCalories)*100)/100).toFixed(1);
     }
   }
   createMeal(newMealInfo): void {
