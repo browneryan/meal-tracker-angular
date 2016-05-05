@@ -11,6 +11,7 @@ import { CaloriesPipe } from './calories.pipe';
   directives: [MealComponent, EditMealDetailsComponent, NewMealComponent],
   pipes: [CaloriesPipe],
   template: `
+    <h4>Calorie Count: {{calorieCount}}</h4>
     <div class="form">
       <div class="form-fields">
         <label>By Calories:</label>
@@ -47,6 +48,7 @@ export class MealListComponent {
   public mealList: Meal[];
   public selectedMeal: Meal;
   public filterCalories: string = "all";
+  public calorieCount: number = 0;
   constructor() {}
   mealClicked(clickedMeal: Meal): void {
     if(this.selectedMeal === clickedMeal) {
@@ -59,6 +61,7 @@ export class MealListComponent {
     this.mealList.push(
       new Meal(newMealInfo[0], newMealInfo[1], newMealInfo[2])
     );
+    this.calorieCount += newMealInfo[2];
   }
   onChangeCalories(selectCalories) {
     this.filterCalories = selectCalories;
