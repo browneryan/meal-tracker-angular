@@ -1,4 +1,4 @@
-import { Component, EventEmitter } from 'angular2/core';
+import { Component } from 'angular2/core';
 import { Meal } from './meal.model';
 import { MealComponent } from './meal.component';
 import { EditMealDetailsComponent } from './edit-meal-details.component';
@@ -22,26 +22,25 @@ import { CaloriesPipe } from './calories.pipe';
       </div>
     </div>
     <div *ngFor="#currentMeal of mealList
-      | calories:filterCalories"
-      [class.selected]="currentMeal === selectedMeal">
+      | calories: filterCalories">
       <h3 (click)="mealClicked(currentMeal)">
         {{ currentMeal.name }}
       </h3>
       <div class="meal-item">
         <meal-display
-          *ngIf="currentMeal === selectedMeal"
+          *ngIf="selectedMeal === currentMeal"
           [meal]="currentMeal">
         </meal-display>
       </div>
     </div>
-    <edit-meal-details
-      *ngIf="selectedMeal"
-      [meal]="selectedMeal">
+    <edit-meal-details *ngIf="selectedMeal"
+      [meal]="selectedMeal"
+      (onUpdateTotalCalories)="updateCalorieCounter($event)">
     </edit-meal-details>
     <new-meal
       (onSubmitNewMeal)="createMeal($event)">
     </new-meal>
-    <h4>Calorie Count: {{calorieCount}} | Average Calories Count: {{averageCaloriesString}}</h4>
+    <h4>Calorie Count: {{calorieCount}} | Average Calorie Count: {{averageCaloriesString}}</h4>
   `
 })
 export class MealListComponent {
@@ -57,9 +56,6 @@ export class MealListComponent {
       this.selectedMeal = undefined;
     } else {
     this.selectedMeal = clickedMeal;
-    this.averageCalories = (this.calorieCount / (this.mealList.length));
-    this.averageCaloriesString =
-    (Math.round((this.averageCalories)*100)/100).toFixed(1);
     }
   }
   createMeal(newMealInfo: Array<any>): void {
@@ -67,6 +63,9 @@ export class MealListComponent {
       new Meal(newMealInfo[0], newMealInfo[1], newMealInfo[2])
     );
     this.calorieCount += newMealInfo[2];
+    this.averageCalories = (this.calorieCount / (this.mealList.length));
+    this.averageCaloriesString =
+    (Math.round((this.averageCalories)*100)/100).toFixed(1);
   }
   onChangeCalories(selectCalories) {
     this.filterCalories = selectCalories;
@@ -79,7 +78,7 @@ export class MealListComponent {
       }
       this.calorieCount += (this.mealList[i].calories);
       this.averageCalories = (this.calorieCount / (this.mealList.length));
-      this.averageCaloriesString = (Math.round((this.averageCalories)*100)/100).toFixed(1);
+      this.averageCaloriesString = (Math.round((this.averageCalories)*100)/100).toFixed(2);
     }
   }
 }
